@@ -71,8 +71,6 @@ User Function pedroneto()
 Return
 
 Static Function oPM(Vlr)
-
-    cRest := cValor1 + cValor2
     
     If Vlr == "+"
         cOperat := "+"
