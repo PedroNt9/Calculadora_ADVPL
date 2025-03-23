@@ -21,6 +21,8 @@
 #include 'Protheus.ch'
 #include 'FWMBROWSE.CH'
 
+//Designer da Calculadora
+
 User Function pedroneto()
     
     Local oDlg := MSDialog():New(0,0,450,320,'Calculadora',,,,,,,,,.T.)
@@ -28,16 +30,16 @@ User Function pedroneto()
     Private cOperat := ""
     Private cValor1 := ""
     Private cValor2 := ""
-    Private cRest
-    Private nOprF
-    Private Vlr
+    Private cRest := "0"
+    Private nOprF := 0
+    Private cVlr := ""
 
     TGet():New( 037,03,{||cRest},oDlg,158,10,,,0,,,.F.,,.T.,,.F.,,.F.,.F.,,.F.,.F.,,,,,, )
     TGet():New( 052,03,{||nOprF},oDlg,158,12,,,0,,,.F.,,.T.,,.F.,,.F.,.F.,,.F.,.F.,,,,,, )
 
     TButton():New( 070, 003, "%",oDlg,{||}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
     TButton():New( 070, 043, "CE",oDlg,{||}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
-    TButton():New( 070, 083, "C",oDlg,{||}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
+    TButton():New( 070, 083, "C",oDlg,{||oPM("C")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
     TButton():New( 070, 123, "<-",oDlg,{||}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
 
     TButton():New( 096, 003, "1/x",oDlg,{||}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
@@ -70,41 +72,55 @@ User Function pedroneto()
 
 Return
 
-Static Function oPM(Vlr)
+//Cálculo Matemático
+
+Static Function oPM(cVlr)
     
-    If Vlr == "+"
+    If cVlr == "+"
         cOperat := "+"
-    ElseIf Vlr == "-"
+    ElseIf cVlr == "-"
         cOperat := "-"
-    ElseIf Vlr == "*"
+    ElseIf cVlr == "*"
         cOperat := "*"
-    ElseIf Vlr == "/"
+    ElseIf cVlr == "/"
         cOperat := "/"
-    ElseIf Vlr == "="
+    ElseIf cVlr == "="
         cOperat := "="
+    ElseIf cVlr == "C"
+        cOperat := "C"
+    ElseIf cVlr == ""
+        cOperat := ""
     EndIf
 
     If cOperat == ""
-        cValor1 += Vlr
-        cRest := cValor1
+        cValor1 += cVlr
+        cRest := cValor1 + cValor2
+        nOprF := VAL(cValor1) + VAL(cValor2)
     ElseIf cOperat == "+"
-        cValor2 += Vlr
-        cRest := cValor2
+        cValor2 += cVlr
+        cRest := cValor1 + cValor2
+        nOprF := VAL(cValor1) + VAL(cValor2)
     ElseIf cOperat == "-"
-        cValor2 += Vlr
+        cValor2 += cVlr
         cRest := cValor1 + cValor2
+        nOprF := VAL(cValor1) + VAL(cValor2)
     ElseIf cOperat == "*"
-        cValor2 += Vlr
+        cValor2 += cVlr
         cRest := cValor1 + cValor2
+        nOprF := VAL(cValor1) + VAL(cValor2)
     ElseIf cOperat == "/"
-        cValor2 += Vlr
+        cValor2 += cVlr
         cRest := cValor1 + cValor2
+        nOprF := VAL(cValor1) + VAL(cValor2)
     ElseIf cOperat == "="
         cRest := cValor1 + cValor2
-        nOprF := val(cRest)
-        Vlr := ""
+        nOprF := VAL(cValor1) + VAL(cValor2)
+    ElseIf cOperat == "C"
+        cValor1 := ""
+        cValor2 := ""
+        cRest := "0"
+        nOprF := 0
+        cVlr := ""
     EndIf
-
     
-
 Return
