@@ -86,11 +86,11 @@ Return
 Static Function cOp_Num(cNum)
 
     If cOperat <> ""
-        cValor1 += cNum
-        cRest := cValor1
-    Else
         cValor2 += cNum
         cRest := cValor2
+    Else
+        cValor1 += cNum
+        cRest := cValor1
     EndIf
 
 Return
