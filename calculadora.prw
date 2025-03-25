@@ -30,42 +30,41 @@ User Function pedroneto()
     Private cOperat := ""
     Private cValor1 := ""
     Private cValor2 := ""
-    Private cRest := "0"
-    Private nOprF := 0
-    Private cVlr := ""
+    Private cRest := ""
+    Private nRest := 0
 
     TGet():New( 037,03,{||cRest},oDlg,158,10,,,0,,,.F.,,.T.,,.F.,,.F.,.F.,,.F.,.F.,,,,,, )
-    TGet():New( 052,03,{||nOprF},oDlg,158,12,,,0,,,.F.,,.T.,,.F.,,.F.,.F.,,.F.,.F.,,,,,, )
+    TGet():New( 052,03,{||nRest},oDlg,158,12,,,0,,,.F.,,.T.,,.F.,,.F.,.F.,,.F.,.F.,,,,,, )
 
     TButton():New( 070, 003, "%",oDlg,{||}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
     TButton():New( 070, 043, "CE",oDlg,{||}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
-    TButton():New( 070, 083, "C",oDlg,{||oPM("C")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
+    TButton():New( 070, 083, "C",oDlg,{||Clear()}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
     TButton():New( 070, 123, "<-",oDlg,{||}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
 
     TButton():New( 096, 003, "1/x",oDlg,{||}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
     TButton():New( 096, 043, "x²",oDlg,{||}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
     TButton():New( 096, 083, "²Vx",oDlg,{||}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
-    TButton():New( 096, 123, "/",oDlg,{||oPM("/")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
+    TButton():New( 096, 123, "/",oDlg,{||cOp_Sinal("/")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
 
-    TButton():New( 122, 003, "7",oDlg,{||oPM("7")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
-    TButton():New( 122, 043, "8",oDlg,{||oPM("8")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
-    TButton():New( 122, 083, "9",oDlg,{||oPM("9")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
-    TButton():New( 122, 123, "*",oDlg,{||oPM("*")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
+    TButton():New( 122, 003, "7",oDlg,{||cOp_Num("7")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
+    TButton():New( 122, 043, "8",oDlg,{||cOp_Num("8")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
+    TButton():New( 122, 083, "9",oDlg,{||cOp_Num("9")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
+    TButton():New( 122, 123, "*",oDlg,{||cOp_Sinal("*")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
 
-    TButton():New( 148, 003, "4",oDlg,{||oPM("4")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
-    TButton():New( 148, 043, "5",oDlg,{||oPM("5")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
-    TButton():New( 148, 083, "6",oDlg,{||oPM("6")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
-    TButton():New( 148, 123, "-",oDlg,{||oPM("-")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
+    TButton():New( 148, 003, "4",oDlg,{||cOp_Num("4")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
+    TButton():New( 148, 043, "5",oDlg,{||cOp_Num("5")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
+    TButton():New( 148, 083, "6",oDlg,{||cOp_Num("6")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
+    TButton():New( 148, 123, "-",oDlg,{||cOp_Sinal("-")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
 
-    TButton():New( 174, 003, "1",oDlg,{||oPM("1")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
-    TButton():New( 174, 043, "2",oDlg,{||oPM("2")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
-    TButton():New( 174, 083, "3",oDlg,{||oPM("3")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
-    TButton():New( 174, 123, "+",oDlg,{||oPM("+")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
+    TButton():New( 174, 003, "1",oDlg,{||cOp_Num("1")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
+    TButton():New( 174, 043, "2",oDlg,{||cOp_Num("2")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
+    TButton():New( 174, 083, "3",oDlg,{||cOp_Num("3")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
+    TButton():New( 174, 123, "+",oDlg,{||cOp_Sinal("+")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
     
     TButton():New( 200, 003, "+/-",oDlg,{||}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
-    TButton():New( 200, 043, "0",oDlg,{||oPM("0")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
+    TButton():New( 200, 043, "0",oDlg,{||cOp_Num("0")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
     TButton():New( 200, 083, ",",oDlg,{||}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
-    TButton():New( 200, 123, "=",oDlg,{||oPM("=")}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
+    TButton():New( 200, 123, "=",oDlg,{||cCalculo()}, 37,23,,,.F.,.T.,.F.,,.F.,,,.F. )
 
     oDlg:Activate(,,,.T.,,,EnchoiceBar(oDlg,{||oDlg:End()} ,{|| oDlg:End() }))
 
@@ -74,53 +73,52 @@ Return
 
 //Cálculo Matemático
 
-Static Function oPM(cVlr)
-    
-    If cVlr == "+"
-        cOperat := "+"
-    ElseIf cVlr == "-"
-        cOperat := "-"
-    ElseIf cVlr == "*"
-        cOperat := "*"
-    ElseIf cVlr == "/"
-        cOperat := "/"
-    ElseIf cVlr == "="
-        cOperat := "="
-    ElseIf cVlr == "C"
-        cOperat := "C"
-    ElseIf cVlr == ""
-        cOperat := ""
+Static Function cOp_Sinal(cSinal)
+
+    If cValor2 <> ""
+        cCalculo()
+    EndIf
+    cOperat := cSinal
+    cRest := cOperat
+   
+Return
+
+Static Function cOp_Num(cNum)
+
+    If cOperat <> ""
+        cValor1 += cNum
+        cRest := cValor1
+    Else
+        cValor2 += cNum
+        cRest := cValor2
     EndIf
 
-    If cOperat == ""
-        cValor1 += cVlr
-        cRest := cValor1 + cValor2
-        nOprF := VAL(cValor1) + VAL(cValor2)
-    ElseIf cOperat == "+"
-        cValor2 += cVlr
-        cRest := cValor1 + cValor2
-        nOprF := VAL(cValor1) + VAL(cValor2)
-    ElseIf cOperat == "-"
-        cValor2 += cVlr
-        cRest := cValor1 + cValor2
-        nOprF := VAL(cValor1) + VAL(cValor2)
-    ElseIf cOperat == "*"
-        cValor2 += cVlr
-        cRest := cValor1 + cValor2
-        nOprF := VAL(cValor1) + VAL(cValor2)
-    ElseIf cOperat == "/"
-        cValor2 += cVlr
-        cRest := cValor1 + cValor2
-        nOprF := VAL(cValor1) + VAL(cValor2)
-    ElseIf cOperat == "="
-        cRest := cValor1 + cValor2
-        nOprF := VAL(cValor1) + VAL(cValor2)
-    ElseIf cOperat == "C"
-        cValor1 := ""
-        cValor2 := ""
-        cRest := "0"
-        nOprF := 0
-        cVlr := ""
+Return
+
+Static Function cCalculo()
+
+    If cValor2 <> ""
+        If cOperat == "+"
+            nRest := VAL(cValor1) + VAL(cValor2)
+        ElseIf cOperat == "-"
+            nRest := VAL(cValor1) - VAL(cValor2)
+        ElseIf cOperat == "*"
+            nRest := VAL(cValor1) - VAL(cValor2)
+        ElseIf cOperat == "/"
+            nRest := VAL(cValor1) - VAL(cValor2)
+        EndIf
+        //cValor1 := CVALTOCHAR(nRest)
+        //cValor2 := ""
     EndIf
-    
+
+Return
+
+Static Function Clear()
+
+    cValor1 := ""
+    cValor2 := ""
+    cOperat := ""
+    cRest := ""
+    nRest := 0
+
 Return
