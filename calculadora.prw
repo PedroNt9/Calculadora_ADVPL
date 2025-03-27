@@ -78,19 +78,18 @@ Static Function cOp_Sinal(cSinal)
     If cValor2 <> ""
         cCalculo()
     EndIf
-    cOperat := cSinal
-    cRest := cOperat
-   
+        cOperat := cSinal
+        cRest := cValor1 + cOperat + cValor2
 Return
 
 Static Function cOp_Num(cNum)
 
     If cOperat <> ""
         cValor2 += cNum
-        cRest := cValor2
+        cRest := cValor1 + cOperat + cValor2
     Else
         cValor1 += cNum
-        cRest := cValor1
+        cRest := cValor1 + cOperat + cValor2       
     EndIf
 
 Return
@@ -103,12 +102,13 @@ Static Function cCalculo()
         ElseIf cOperat == "-"
             nRest := VAL(cValor1) - VAL(cValor2)
         ElseIf cOperat == "*"
-            nRest := VAL(cValor1) - VAL(cValor2)
+            nRest := VAL(cValor1) * VAL(cValor2)
         ElseIf cOperat == "/"
-            nRest := VAL(cValor1) - VAL(cValor2)
+            nRest := VAL(cValor1) / VAL(cValor2)
         EndIf
-        //cValor1 := CVALTOCHAR(nRest)
-        //cValor2 := ""
+        cValor1 := CVALTOCHAR(nRest)
+        cValor2 := ""
+        cOperat := ""
     EndIf
 
 Return
